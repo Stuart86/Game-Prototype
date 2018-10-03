@@ -6,6 +6,7 @@ public class Upward : MonoBehaviour
 {
     public float floatStrength = 3.5f;
     public Rigidbody2D rb;
+    public GameObject Ballon;
 
     // Use this for initialization
     void Start ()
@@ -18,4 +19,12 @@ public class Upward : MonoBehaviour
     {
         rb.AddForce(Vector3.up * floatStrength);
     }
+ 
+    void OnBecameInvisible()
+    {
+
+        Instantiate(Ballon, new Vector2(Random.Range(-3f, 3f), Random.Range(-3f, 3f)), Quaternion.identity);
+        Destroy(Ballon);
+    }
+
 }

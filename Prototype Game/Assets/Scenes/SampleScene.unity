@@ -516,8 +516,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1047139482}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.47, y: 1.15, z: 0}
-  m_LocalScale: {x: 0.048821736, y: 0.045555416, z: 1}
+  m_LocalPosition: {x: -8.77, y: 1.851, z: 0}
+  m_LocalScale: {x: 0.033052314, y: 0.028016582, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -975,4 +975,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floatStrength: 3.5
-  rb: {fileID: 0}
+  rb: {fileID: 1047139485}
+  Ballon: {fileID: 1047139482}
