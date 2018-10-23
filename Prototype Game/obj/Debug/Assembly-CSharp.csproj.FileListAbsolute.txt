@@ -161,8 +161,8 @@ C:\Users\Stuart\Documents\Unity Projects\Prototype game\Game-Prototype\Prototype
 C:\Users\Stuart\Documents\Unity Projects\Prototype game\Game-Prototype\Prototype Game\Temp\bin\Debug\UnityEngine.GoogleAudioSpatializer.xml
 C:\Users\Stuart\Documents\Unity Projects\Prototype game\Game-Prototype\Prototype Game\Temp\bin\Debug\UnityEngine.HoloLens.xml
 C:\Users\Stuart\Documents\Unity Projects\Prototype game\Game-Prototype\Prototype Game\Temp\bin\Debug\UnityEngine.SpatialTracking.xml
-C:\Users\Stuart\Documents\Unity Projects\Prototype game\Game-Prototype\Prototype Game\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
 C:\Users\Stuart\Documents\Unity Projects\Prototype game\Game-Prototype\Prototype Game\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
 C:\Users\Stuart\Documents\Unity Projects\Prototype game\Game-Prototype\Prototype Game\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\Stuart\Documents\Unity Projects\Prototype game\Game-Prototype\Prototype Game\obj\Debug\Assembly-CSharp.dll
 C:\Users\Stuart\Documents\Unity Projects\Prototype game\Game-Prototype\Prototype Game\obj\Debug\Assembly-CSharp.pdb
+C:\Users\Stuart\Documents\Unity Projects\Prototype game\Game-Prototype\Prototype Game\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
