@@ -22,9 +22,10 @@ GameObject:
   - component: {fileID: 212471145734919838}
   - component: {fileID: 50537004940575542}
   - component: {fileID: 114660183829785698}
+  - component: {fileID: 58308379382718688}
   m_Layer: 0
-  m_Name: Circle
-  m_TagString: Untagged
+  m_Name: CannonBall
+  m_TagString: CannonBall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,6 +63,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &58308379382718688
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1330762730957156}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.25
 --- !u!114 &114660183829785698
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -110,12 +126,12 @@ SpriteRenderer:
   m_SortingLayerID: 337798071
   m_SortingLayer: 3
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 6d2d6c036f18a411ca7bea6934471c60, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bdfdb63733c49c44d9f96614fbb0db27, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.5, y: 2.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

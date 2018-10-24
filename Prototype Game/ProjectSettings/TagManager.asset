@@ -4,9 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - BallonTag
-  - CanonBall
   - Cannon
+  - BalloonTag
+  - TriggerTestTag
+  - CannonBall
   layers:
   - Default
   - TransparentFX
