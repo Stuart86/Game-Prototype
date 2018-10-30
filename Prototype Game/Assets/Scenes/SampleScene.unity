@@ -882,6 +882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb0d115902174ccb812f95432d7199d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameText: {fileID: 67400007}
   rotateSpeed: 100
   bulletSpeed: 0
   bullet: {fileID: 1330762730957156, guid: a14cf5b0dbad3475394d9aef5be3e9f8, type: 2}
