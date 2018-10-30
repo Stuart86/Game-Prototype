@@ -1,0 +1,4 @@
+﻿1>------ Build started: Project: Assembly-CSharp, Configuration: Debug Any CPU ------
+1>C:\Users\Stuart\Documents\Unity Projects\Prototype game\Game-Prototype\Prototype Game\Assets\Scripts\CannonController.cs(10,15,10,24): warning CS0108: 'CannonController.rigidbody' hides inherited member 'Component.rigidbody'. Use the new keyword if hiding was intended.
+1>  Assembly-CSharp -> C:\Users\Stuart\Documents\Unity Projects\Prototype game\Game-Prototype\Prototype Game\Temp\bin\Debug\Assembly-CSharp.dll
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
