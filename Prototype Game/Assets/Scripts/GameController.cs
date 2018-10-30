@@ -24,7 +24,6 @@ public class GameController : MonoBehaviour
 
     void OnBecameInvisible()
     {
-
         FloatStrength = 1;
 
         rb = Instantiate(rb, new Vector2(Random.Range(-10f, -8f), Random.Range(-4f, -3f)), Quaternion.identity);
