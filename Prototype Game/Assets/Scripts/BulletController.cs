@@ -8,10 +8,11 @@ public class BulletController : MonoBehaviour
     public float xSpeed = 0.0f;
     public float ySpeed = 0.0f;
 
+    CannonController cannonControllerObject;
+
     // Use this for initialization
     void Start()
     {
-        StartCoroutine(DestroyBullet());
 
     }
 
@@ -24,9 +25,9 @@ public class BulletController : MonoBehaviour
         transform.position = position;
     }
 
-    IEnumerator DestroyBullet()
+    void OnBecameInvisible()
     {
-        yield return new WaitForSeconds(3.5f);
-        Destroy(gameObject);
+        Object.Destroy(gameObject);
+        CannonController.bulletIsCreated = false;
     }
 }
