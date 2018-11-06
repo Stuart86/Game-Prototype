@@ -6,13 +6,13 @@ using UnityEngine.UI;
 public class CannonController : MonoBehaviour
 {
 
-    public Text gameText;
+    public Text shotsFiredText;
+    private int shotsFiredCount;
 
     public int rotateSpeed = 100;
     Rigidbody rigidbody;
     public float bulletSpeed;
     public static bool bulletIsCreated = false;
-    private int shotsFiredCount;
 
 
     public GameObject bullet;
@@ -25,8 +25,8 @@ public class CannonController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         bulletSpeed = 0.1f;
 
-        gameText.text = "Shots Fired: " + shotsFiredCount.ToString();
         shotsFiredCount = 0;
+        shotsFiredText.text = "Shots Fired: " + shotsFiredCount.ToString();
     }
 
     // Update is called once per frame
@@ -70,7 +70,7 @@ public class CannonController : MonoBehaviour
                 go.GetComponent<BulletController>().ySpeed = rigidbody.transform.up.y * bulletSpeed;
                 shotsFiredCount = shotsFiredCount + 1;
                 bulletIsCreated = true;
-                gameText.text = "Shots Fired: " + shotsFiredCount.ToString();
+                shotsFiredText.text = "Shots Fired: " + shotsFiredCount.ToString();
             }
         }
 
