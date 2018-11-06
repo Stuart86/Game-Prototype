@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        Time.timeScale = 1;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -25,27 +26,38 @@ public class GameController : MonoBehaviour
     void OnBecameInvisible()
     {
         FloatStrength = 1;
+        GameObject Balloon = new GameObject("test");
 
-        rb = Instantiate(rb, new Vector2(Random.Range(-10f, -8f), Random.Range(-4f, -3f)), Quaternion.identity);
-        rb.name = "Balloon"; /*Midlertidlig løsning*/
+        //rb = Instantiate(rb, new Vector2(Random.Range(-10f, -8f), Random.Range(-4f, -3f)), Quaternion.identity);
+        //rb.name = "Balloon"; /*Midlertidlig løsning*/
         VelocityChange(FloatStrength);
         Destroy(Balloon);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("CannonBall"))
         {
-            FloatStrength = 1;
-            rb = Instantiate(rb, new Vector2(Random.Range(-10f, -8f), Random.Range(-4f, -3f)), Quaternion.identity);
-            rb.name = "Balloon";
-            VelocityChange(FloatStrength);
-            Destroy(Balloon);
+            Debug.Log("Hola");
+            Invoke("SpawnObject", 2);
+
+            //Balloon.GetComponent<Renderer>().enabled = false;
+            Destroy(Balloon, 2.25f);
             Destroy(other.gameObject);
         }
     }
-    void VelocityChange(float Speed)
+    public void VelocityChange(float Speed)
     {
         rb.velocity = new Vector3(0, Speed, 0);
+    }
+
+    public void SpawnObject()
+    {
+        Debug.Log("Her virker det!!");
+        
+        FloatStrength = 1;
+        rb = Instantiate(rb, new Vector2(Random.Range(-10f, -8f), Random.Range(-4f, -3f)), Quaternion.identity);
+        rb.name = "Balloon";
+        VelocityChange(FloatStrength);
     }
 }
