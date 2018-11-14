@@ -4,60 +4,71 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    public int FloatStrength = 1;
-    public Rigidbody2D rb;
+    
+    public Rigidbody2D RB;
     public GameObject Balloon;
-    public bool ObjectDestroyed;
+    public GameObject[] BalloonClones;
+    public Transform SpawnPos;
 
+    public int ObjectSpawned = 0;
+    public int ObjectsDestroyed = 0;
+    public int SpawnNumber;
+    public int MaxBalloons = 40;
+    public float SpawnTime = 0;
+
+    public bool BalloonDestroyed = false;
 
     // Use this for initialization
-    void Start ()
+    public void Start ()
     {
-        Time.timeScale = 1;
-        rb = GetComponent<Rigidbody2D>();
+        BalloonClones = new GameObject[MaxBalloons];
+        setSpawnTime(2.0f);
+        StartCoroutine(SpawnObject(1, SpawnTime));
+        //SpawnObject(1); //Skal startes!
+        setSpawnNumber(3);
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        rb.AddForce(Vector3.up * FloatStrength);
-    }
-
-    void OnBecameInvisible()
-    {
-        FloatStrength = 1;
-        GameObject Balloon = new GameObject("test");
-
-        //rb = Instantiate(rb, new Vector2(Random.Range(-10f, -8f), Random.Range(-4f, -3f)), Quaternion.identity);
-        //rb.name = "Balloon"; /*Midlertidlig løsning*/
-        VelocityChange(FloatStrength);
-        Destroy(Balloon);
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("CannonBall"))
+        if (BalloonDestroyed == true && ObjectsDestroyed == ObjectSpawned)
         {
-            Debug.Log("Hola");
-            Invoke("SpawnObject", 2);
+            //Debug.Log("ObjectsDestroyed = " + ObjectsDestroyed.ToString() + " ObjectSpawned = " +  ObjectSpawned.ToString());
+            for (int i = 0; i < SpawnNumber; i++)
+            {
+                //SpawnObject(i);
+                StartCoroutine(SpawnObject(i, SpawnTime));
+            }
 
-            //Balloon.GetComponent<Renderer>().enabled = false;
-            Destroy(Balloon, 2.25f);
-            Destroy(other.gameObject);
+            BalloonDestroyed = false;
         }
     }
-    public void VelocityChange(float Speed)
+
+    public IEnumerator SpawnObject(int Objectnumber, float delayTime)
     {
-        rb.velocity = new Vector3(0, Speed, 0);
+        yield return new WaitForSeconds(delayTime);
+
+        BalloonClones[Objectnumber] = (GameObject)Instantiate(Balloon, new Vector2(Random.Range(-10f, -5f), Random.Range(-4f, -3f)), Quaternion.identity);
+        RB = BalloonClones[Objectnumber].GetComponent<Rigidbody2D>();
+
+        ObjectSpawned++;
+        
+       //Debug.Log("Objects spawned = " + ObjectSpawned.ToString());
     }
 
-    public void SpawnObject()
+    public void setSpawnNumber(int SpawnNumber)
     {
-        Debug.Log("Her virker det!!");
-        
-        FloatStrength = 1;
-        rb = Instantiate(rb, new Vector2(Random.Range(-10f, -8f), Random.Range(-4f, -3f)), Quaternion.identity);
-        rb.name = "Balloon";
-        VelocityChange(FloatStrength);
+        this.SpawnNumber = SpawnNumber;
+    }
+
+    public void setBalloonState()
+    {
+        //Debug.Log("Objects destroyed = " + ObjectsDestroyed.ToString());
+        ObjectsDestroyed++;
+        this.BalloonDestroyed = true;
+    }
+    public void setSpawnTime(float newSpawnTime)
+    {
+        this.SpawnTime = newSpawnTime;
     }
 }

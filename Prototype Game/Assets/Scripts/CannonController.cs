@@ -55,7 +55,7 @@ public class CannonController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            bulletSpeed = 0.3f;
+            bulletSpeed = 0.5f;
         }
 
         Vector2 position = transform.position;
