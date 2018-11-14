@@ -36,7 +36,6 @@ public class GameController : MonoBehaviour
             //Debug.Log("ObjectsDestroyed = " + ObjectsDestroyed.ToString() + " ObjectSpawned = " +  ObjectSpawned.ToString());
             for (int i = 0; i < SpawnNumber; i++)
             {
-                //SpawnObject(i);
                 StartCoroutine(SpawnObject(i, SpawnTime));
             }
 
