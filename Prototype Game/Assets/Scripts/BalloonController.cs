@@ -1,20 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BalloonController : MonoBehaviour
 {
+    public int balloonsDestroyed;
+
     public GameObject Balloon;
     public Rigidbody2D RB;
     public int  FloatStrength = 0;
 
     GameController GC;
+    CannonController cannonController;
+
 
     // Use this for initializationa
     public void Start ()
     {
+        GameObject cannon = GameObject.Find("Cannon");
+        cannonController = cannon.GetComponent<CannonController>();
+
         RB = Balloon.GetComponent<Rigidbody2D>();
         GC = FindObjectOfType<GameController>();
+        //cannonController = FindObjectOfType <CannonController>();
     }
 
     // Update is called once per frame
@@ -41,6 +50,10 @@ public class BalloonController : MonoBehaviour
         {
             Destroy(Balloon);
             Destroy(other.gameObject);
+
+            cannonController.SetBulletIsCreated(false);
+            cannonController.IncrementBalloonsDestroyedCount(1);
+            cannonController.IncrementMoneyAmountWith(2);
         }
     }
 }

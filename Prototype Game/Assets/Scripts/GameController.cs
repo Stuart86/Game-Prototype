@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class GameController : MonoBehaviour
     public GameObject Balloon;
     public GameObject[] BalloonClones;
     public Transform SpawnPos;
+
+    public Text moneyAmountText;
 
     public int ObjectSpawned = 0;
     public int ObjectsDestroyed = 0;

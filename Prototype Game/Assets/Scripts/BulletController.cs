@@ -8,12 +8,13 @@ public class BulletController : MonoBehaviour
     public float xSpeed = 0.0f;
     public float ySpeed = 0.0f;
 
-    CannonController cannonControllerObject;
+    CannonController cannonController;
+
 
     // Use this for initialization
     void Start()
     {
-
+        cannonController = FindObjectOfType<CannonController>();
     }
 
     // Update is called once per frame
@@ -28,6 +29,6 @@ public class BulletController : MonoBehaviour
     void OnBecameInvisible()
     {
         Object.Destroy(gameObject);
-        CannonController.bulletIsCreated = false;
+        cannonController.SetBulletIsCreated(false);
     }
 }
