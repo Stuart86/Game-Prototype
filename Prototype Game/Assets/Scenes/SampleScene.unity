@@ -405,8 +405,10 @@ MonoBehaviour:
   ObjectsDestroyed: 0
   SpawnNumber: 4
   MaxBalloons: 40
+  BalloonLevel: 1
   SpawnTime: 0
   BalloonDestroyed: 0
+  BalloonPenetration: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0

@@ -6,7 +6,9 @@ public class BalloonController : MonoBehaviour
 {
     public GameObject Balloon;
     public Rigidbody2D RB;
-    public int  FloatStrength = 0;
+
+    public float FloatStrength = 0;
+    public int BalloonHit = 0;
 
     GameController GC;
 
@@ -20,10 +22,10 @@ public class BalloonController : MonoBehaviour
     // Update is called once per frame
     public void Update ()
     {
-        VelocityChange(2);
+        VelocityChange(1.0f);
     }
 
-    public void VelocityChange(int FloatStrength)
+    public void VelocityChange(float FloatStrength)
     {
         RB.AddForce(Vector3.up * FloatStrength);
     }
@@ -31,16 +33,25 @@ public class BalloonController : MonoBehaviour
     public void OnBecameInvisible()
     {
         Object.Destroy(gameObject);
-        GC.setBalloonState();
+        GC.setBalloonDestroyed();
         //Debug.Log("Object killed yes man!");
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
+        
         if (other.gameObject.CompareTag("CannonBall"))
         {
-            Destroy(Balloon);
-            Destroy(other.gameObject);
+            BalloonHit++;
+
+            if (GC.getBalloonPenetration() == false)
+            {
+                Destroy(other.gameObject);
+            } 
+            if (GC.getBalloonDifficulty() == BalloonHit)
+            {
+                Destroy(Balloon);
+            }
         }
     }
 }

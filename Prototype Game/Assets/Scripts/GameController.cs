@@ -14,9 +14,11 @@ public class GameController : MonoBehaviour
     public int ObjectsDestroyed = 0;
     public int SpawnNumber;
     public int MaxBalloons = 40;
+    public int BalloonLevel = 1;
     public float SpawnTime = 0;
 
     public bool BalloonDestroyed = false;
+    public bool BalloonPenetration = false;
 
     // Use this for initialization
     public void Start ()
@@ -60,14 +62,33 @@ public class GameController : MonoBehaviour
         this.SpawnNumber = SpawnNumber;
     }
 
-    public void setBalloonState()
+    public void setBalloonDestroyed()
     {
         //Debug.Log("Objects destroyed = " + ObjectsDestroyed.ToString());
         ObjectsDestroyed++;
         this.BalloonDestroyed = true;
     }
+
+    public void setBalloonPenetration()
+    {
+        this.BalloonPenetration = true;
+    }
+
+    public bool getBalloonPenetration()
+    {
+        return BalloonPenetration;
+    }
+
     public void setSpawnTime(float newSpawnTime)
     {
         this.SpawnTime = newSpawnTime;
+    }
+    public void setBalloonDifficulty(int Balloonlv)
+    {
+        this.BalloonLevel = Balloonlv;
+    }
+    public int getBalloonDifficulty()
+    {
+        return BalloonLevel;
     }
 }

@@ -154,7 +154,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Balloon: {fileID: 1039271705151174}
   RB: {fileID: 0}
-  FloatStrength: 2
+  FloatStrength: 0.5
+  BalloonHit: 0
 --- !u!212 &212958979061136560
 SpriteRenderer:
   m_ObjectHideFlags: 1
