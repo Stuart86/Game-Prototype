@@ -6,7 +6,7 @@
       <File FileName="Assets/Scripts/BulletController.cs" Line="29" Column="29" />
       <File FileName="Assets/Scripts/BalloonController.cs" Line="56" Column="58" />
       <File FileName="Assets/Scripts/GameController.cs" Line="5" Column="1" />
-      <File FileName="Assets/Scripts/MainMenu.cs" Line="8" Column="12" />
+      <File FileName="Assets/Scripts/MainMenu.cs" Line="10" Column="77" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
