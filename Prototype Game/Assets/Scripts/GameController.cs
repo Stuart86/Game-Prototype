@@ -1,28 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    
+
     public Rigidbody2D RB;
     public GameObject Balloon;
     public GameObject[] BalloonClones;
     public Transform SpawnPos;
 
-    public Text moneyAmountText;
-
     public int ObjectSpawned = 0;
     public int ObjectsDestroyed = 0;
     public int SpawnNumber;
     public int MaxBalloons = 40;
+    public int BalloonLevel = 1;
     public float SpawnTime = 0;
 
     public bool BalloonDestroyed = false;
+    public bool BalloonPenetration = false;
 
     // Use this for initialization
-    public void Start ()
+    public void Start()
     {
         BalloonClones = new GameObject[MaxBalloons];
         setSpawnTime(2.0f);
@@ -54,8 +53,8 @@ public class GameController : MonoBehaviour
         RB = BalloonClones[Objectnumber].GetComponent<Rigidbody2D>();
 
         ObjectSpawned++;
-        
-       //Debug.Log("Objects spawned = " + ObjectSpawned.ToString());
+
+        //Debug.Log("Objects spawned = " + ObjectSpawned.ToString());
     }
 
     public void setSpawnNumber(int SpawnNumber)
@@ -63,14 +62,33 @@ public class GameController : MonoBehaviour
         this.SpawnNumber = SpawnNumber;
     }
 
-    public void setBalloonState()
+    public void setBalloonDestroyed()
     {
         //Debug.Log("Objects destroyed = " + ObjectsDestroyed.ToString());
         ObjectsDestroyed++;
         this.BalloonDestroyed = true;
     }
+
+    public void setBalloonPenetration()
+    {
+        this.BalloonPenetration = true;
+    }
+
+    public bool getBalloonPenetration()
+    {
+        return BalloonPenetration;
+    }
+
     public void setSpawnTime(float newSpawnTime)
     {
         this.SpawnTime = newSpawnTime;
+    }
+    public void setBalloonDifficulty(int Balloonlv)
+    {
+        this.BalloonLevel = Balloonlv;
+    }
+    public int getBalloonDifficulty()
+    {
+        return BalloonLevel;
     }
 }

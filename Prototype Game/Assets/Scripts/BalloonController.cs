@@ -1,38 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BalloonController : MonoBehaviour
 {
-    public int balloonsDestroyed;
-
     public GameObject Balloon;
     public Rigidbody2D RB;
-    public int  FloatStrength = 0;
+
+    public float FloatStrength = 0;
+    public int BalloonHit = 0;
 
     GameController GC;
-    CannonController cannonController;
-
+    CannonController CC;
 
     // Use this for initializationa
-    public void Start ()
+    public void Start()
     {
-        GameObject cannon = GameObject.Find("Cannon");
-        cannonController = cannon.GetComponent<CannonController>();
-
         RB = Balloon.GetComponent<Rigidbody2D>();
         GC = FindObjectOfType<GameController>();
-        //cannonController = FindObjectOfType <CannonController>();
+        CC = FindObjectOfType<CannonController>();
     }
 
     // Update is called once per frame
-    public void Update ()
+    public void Update()
     {
-        VelocityChange(2);
+        VelocityChange(1.0f);
     }
 
-    public void VelocityChange(int FloatStrength)
+    public void VelocityChange(float FloatStrength)
     {
         RB.AddForce(Vector3.up * FloatStrength);
     }
@@ -40,7 +35,7 @@ public class BalloonController : MonoBehaviour
     public void OnBecameInvisible()
     {
         Object.Destroy(gameObject);
-        GC.setBalloonState();
+        GC.setBalloonDestroyed();
         //Debug.Log("Object killed yes man!");
     }
 
@@ -48,12 +43,19 @@ public class BalloonController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("CannonBall"))
         {
-            Destroy(Balloon);
-            Destroy(other.gameObject);
+            BalloonHit++;
 
-            cannonController.SetBulletIsCreated(false);
-            cannonController.IncrementBalloonsDestroyedCount(1);
-            cannonController.IncrementMoneyAmountWith(2);
+            if (GC.getBalloonPenetration() == false)
+            {
+                Destroy(other.gameObject);
+                CC.SetBulletIsCreated(false);
+            }
+            if (GC.getBalloonDifficulty() == BalloonHit)
+            {
+                Destroy(Balloon);
+                CC.IncrementBalloonsDestroyedCount(1);
+                CC.IncrementMoneyAmountWith(2);
+            }
         }
     }
 }
