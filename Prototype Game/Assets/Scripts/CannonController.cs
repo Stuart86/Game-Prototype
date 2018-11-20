@@ -28,7 +28,7 @@ public class CannonController : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
-        bulletSpeed = 0.35f;
+        bulletSpeed = 0.75f;
 
         shotsFiredCount = 0;
         balloonsDestroyedCount = 0;

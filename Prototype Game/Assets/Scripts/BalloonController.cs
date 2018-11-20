@@ -7,7 +7,6 @@ public class BalloonController : MonoBehaviour
     public GameObject Balloon;
     public Rigidbody2D RB;
 
-    public float FloatStrength = 0;
     public int BalloonHit = 0;
 
     GameController GC;
@@ -19,12 +18,18 @@ public class BalloonController : MonoBehaviour
         RB = Balloon.GetComponent<Rigidbody2D>();
         GC = FindObjectOfType<GameController>();
         CC = FindObjectOfType<CannonController>();
+        VelocityChange(GC.getFloatStrength());
     }
 
     // Update is called once per frame
     public void Update()
     {
-        VelocityChange(1.0f);
+        //Debug.Log(GC.getObjectsDestroyed() + " " + GC.getObjectSpawned());
+        //if (GC.getObjectsDestroyed() == GC.getObjectSpawned() && GC.getBalloonDestroyed())
+        //{
+        //   Debug.Log("Velocity: " + GC.getFloatStrength());
+        //   VelocityChange(GC.getFloatStrength());
+        //}
     }
 
     public void VelocityChange(float FloatStrength)
