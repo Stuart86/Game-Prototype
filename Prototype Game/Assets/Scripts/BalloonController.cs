@@ -9,16 +9,18 @@ public class BalloonController : MonoBehaviour
 
     public int BalloonHit = 0;
 
-    GameController GC;
-    CannonController CC;
+    public GameController GC;
+    public GameSettings GS;
+    public CannonController CC;
 
     // Use this for initializationa
     public void Start()
     {
         RB = Balloon.GetComponent<Rigidbody2D>();
         GC = FindObjectOfType<GameController>();
+        GS = FindObjectOfType<GameSettings>();
         CC = FindObjectOfType<CannonController>();
-        VelocityChange(GC.getFloatStrength());
+        VelocityChange(GS.getFloatStrength());
     }
 
     // Update is called once per frame
@@ -40,7 +42,7 @@ public class BalloonController : MonoBehaviour
     public void OnBecameInvisible()
     {
         Object.Destroy(gameObject);
-        GC.setBalloonDestroyed();
+        GS.setBalloonDestroyedTrue();
         //Debug.Log("Object killed yes man!");
     }
 
@@ -50,12 +52,12 @@ public class BalloonController : MonoBehaviour
         {
             BalloonHit++;
 
-            if (GC.getBalloonPenetration() == false)
+            if (GS.getBalloonPenetration() == false)
             {
                 Destroy(other.gameObject);
                 CC.SetBulletIsCreated(false);
             }
-            if (GC.getBalloonDifficulty() == BalloonHit)
+            if (GS.getBalloonDifficulty() == BalloonHit)
             {
                 Destroy(Balloon);
                 CC.IncrementBalloonsDestroyedCount(1);

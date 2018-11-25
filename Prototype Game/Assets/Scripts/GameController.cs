@@ -7,43 +7,31 @@ public class GameController : MonoBehaviour
 {
 
     public Rigidbody2D RB;
+    public GameSettings GS;
     public GameObject Balloon;
     public GameObject[] BalloonClones;
     public Transform SpawnPos;
     public Text DisplayLevelText;
 
-    public int ObjectSpawned = 0;
-    public int ObjectsDestroyed = 0;
-    public int SpawnNumber;
-    public int MaxBalloons = 40;
-    public int BalloonArmor = 1;
-    public int Gamelevel = 1;
-
-    public float FloatStrength = 30f;
-    public float SpawnTime = 0;
-
-    public bool BalloonDestroyed = false;
-    public bool BalloonPenetration = false;
-    
-
     // Use this for initialization
     public void Start()
     {
-        BalloonClones = new GameObject[MaxBalloons];
-        StartCoroutine(SpawnObject(1, SpawnTime));
+        GS = FindObjectOfType<GameSettings>();
+        BalloonClones = new GameObject[GS.getMaxBalloons()];
+        StartCoroutine(SpawnObject(1, GS.getSpawnTime()));
         StartCoroutine(GameLevelTrigger(0));
     }
     // Update is called once per frame
     public void Update()
     {
-        if (BalloonDestroyed == true && ObjectsDestroyed == ObjectSpawned)
+        if (GS.getBalloonDestroyed() == true && GS.getObjectsDestroyed() == GS.getObjectSpawnedCount())
         {
-            for (int i = 0; i < SpawnNumber; i++)
+            for (int i = 0; i < GS.getSpawnNumber(); i++)
             {
-                StartCoroutine(SpawnObject(i, SpawnTime));
+                StartCoroutine(SpawnObject(i, GS.getSpawnTime()));
             }
 
-            BalloonDestroyed = false;
+            GS.setBalloonDestroyedFalse();
         }
     }
     public IEnumerator SpawnObject(int Objectnumber, float delayTime)
@@ -53,7 +41,7 @@ public class GameController : MonoBehaviour
         BalloonClones[Objectnumber] = Instantiate(Balloon, new Vector2(Random.Range(-10f, max: -2.0f), Random.Range(-4f, -3f)), Quaternion.identity);
         RB = BalloonClones[Objectnumber].GetComponent<Rigidbody2D>();
 
-        ObjectSpawnedCounter();
+        GS.ObjectSpawnedCounter();
     }
     public void DisableLevelText()
     {
@@ -65,7 +53,7 @@ public class GameController : MonoBehaviour
         switch (textchoice)
         {
             case 1:
-                DisplayLevelText.text = "Level " + Gamelevel;
+                DisplayLevelText.text = "Level " + GS.getGamelevel();
                 break;
             case 2:
                 DisplayLevelText.text = "You won!";
@@ -80,7 +68,7 @@ public class GameController : MonoBehaviour
                
                 break;
             case 6:
-               
+   
                 break;
             default:
                 Debug.Log("Default Break");
@@ -88,70 +76,67 @@ public class GameController : MonoBehaviour
         }
 
     }
-    public void setGamelevel(int Gamelevel)
-    {
-        this.Gamelevel = Gamelevel;
-    }
+    
     public IEnumerator GameLevelTrigger(float delayTime)
     {
-        switch (Gamelevel)
+        switch (GS.getGamelevel())
         {
             case 1:
                 yield return new WaitForSeconds(delayTime);
                 DisplayText(1);
-                setSpawnTime(2.0f);
-                setSpawnNumber(1);
-                setFloatStrength(30.0f);
-                setGamelevel(2);
+                GS.setSpawnTime(2.0f);
+                GS.setSpawnNumber(1);
+                GS.setFloatStrength(30.0f);
+                GS.setGamelevel(2);
                 Invoke("DisableLevelText", 4);
                 StartCoroutine(GameLevelTrigger(30));
                 break;
             case 2:
                 yield return new WaitForSeconds(delayTime);
                 DisplayText(1);
-                setSpawnTime(1.5f);
-                setSpawnNumber(2);
-                setFloatStrength(45.0f);
-                setGamelevel(3);
+                GS.setSpawnTime(1.5f);
+                GS.setSpawnNumber(2);
+                GS.setFloatStrength(45.0f);
+                GS.setGamelevel(3);
                 Invoke("DisableLevelText", 4);
                 StartCoroutine(GameLevelTrigger(40));
                 break;
             case 3:
                 yield return new WaitForSeconds(delayTime);
                 DisplayText(1);
-                setSpawnTime(1.3f);
-                setSpawnNumber(3);
-                setFloatStrength(60.0f);
-                setGamelevel(4);
+                GS.setSpawnTime(1.3f);
+                GS.setSpawnNumber(3);
+                GS.setFloatStrength(60.0f);
+                GS.setGamelevel(4);
                 Invoke("DisableLevelText", 4);
                 StartCoroutine(GameLevelTrigger(45));
                 break;
             case 4:
                 yield return new WaitForSeconds(delayTime);
                 DisplayText(1);
-                setSpawnTime(1.1f);
-                setSpawnNumber(4);
-                setFloatStrength(75.0f);
-                setGamelevel(5);
+                GS.setSpawnTime(1.1f);
+                GS.setSpawnNumber(4);
+                GS.setFloatStrength(75.0f);
+                GS.setGamelevel(5);
                 Invoke("DisableLevelText", 4);
                 StartCoroutine(GameLevelTrigger(50));
                 break;
             case 5:
                 yield return new WaitForSeconds(delayTime);
                 DisplayText(1);
-                setSpawnTime(1.0f);
-                setSpawnNumber(5);
-                setFloatStrength(95.0f);
-                setGamelevel(6);
+                GS.setSpawnTime(1.0f);
+                GS.setSpawnNumber(5);
+                GS.setFloatStrength(95.0f);
+                GS.setGamelevel(6);
                 Invoke("DisableLevelText", 4);
                 StartCoroutine(GameLevelTrigger(55));
                 break;
             case 6:
                 yield return new WaitForSeconds(delayTime);
                 DisplayText(1);
-                setSpawnTime(0.8f);
-                setSpawnNumber(6);
-                setFloatStrength(108.0f);
+                GS.setSpawnTime(0.8f);
+                GS.setSpawnNumber(6);
+                GS.setFloatStrength(108.0f);
                 Invoke("DisableLevelText", 4);
                 DisplayText(2);
                 break;
@@ -161,65 +146,4 @@ public class GameController : MonoBehaviour
         }
 
     }
-    public void setSpawnNumber(int SpawnNumber)
-    {
-        this.SpawnNumber = SpawnNumber;
-    }
-    public int getSpawnNumber()
-    {
-        return SpawnNumber;
-    }
-    public void ObjectSpawnedCounter()
-    {
-        ObjectSpawned++;
-    }
-    public int getObjectSpawned()
-    {
-        return ObjectSpawned;
-    }
-    public int getObjectsDestroyed()
-    {
-        return ObjectsDestroyed;
-    }
-    public void setBalloonDestroyed()
-    {
-        //Debug.Log("Objects destroyed = " + ObjectsDestroyed.ToString());
-        ObjectsDestroyed++;
-        this.BalloonDestroyed = true;
-    }
-    public bool getBalloonDestroyed()
-    {
-        return BalloonDestroyed;
-    }
-    public void setBalloonPenetration()
-    {
-        this.BalloonPenetration = true;
-    }
-    public bool getBalloonPenetration()
-    {
-        return BalloonPenetration;
-    }
-    public void setSpawnTime(float newSpawnTime)
-    {
-        this.SpawnTime = newSpawnTime;
-    }
-    public void setBalloonDifficulty(int Balloonlv)
-    {
-        this.BalloonArmor = Balloonlv;
-    }
-    public int getBalloonDifficulty()
-    {
-        return BalloonArmor;
-    }
-    public void setFloatStrength(float FloatStrength)
-    {
-        this.FloatStrength = FloatStrength;
-    }
-    public float getFloatStrength()
-    {
-        return this.FloatStrength;
-    }
-
-
-
 }

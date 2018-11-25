@@ -375,6 +375,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -401,20 +402,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RB: {fileID: 1099914258}
+  GS: {fileID: 519420033}
   Balloon: {fileID: 1039271705151174, guid: 9c4163942bdf848429b14b0ad56b32cc, type: 2}
   BalloonClones: []
   SpawnPos: {fileID: 1099914260}
   DisplayLevelText: {fileID: 908152400}
-  ObjectSpawned: 0
-  ObjectsDestroyed: 0
-  SpawnNumber: 0
-  MaxBalloons: 40
-  BalloonArmor: 1
-  Gamelevel: 1
-  FloatStrength: 27
-  SpawnTime: 0
-  BalloonDestroyed: 0
-  BalloonPenetration: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -468,6 +460,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1f8e2e46c355d847a8426c3ac083e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectSpawned: 0
+  ObjectsDestroyed: 0
+  SpawnNumber: 0
+  MaxBalloons: 40
+  BalloonArmor: 1
+  Gamelevel: 1
+  FloatStrength: 30
+  SpawnTime: 0
+  BalloonDestroyed: 0
+  BalloonPenetration: 0
 --- !u!1 &559270599
 GameObject:
   m_ObjectHideFlags: 0
@@ -1004,7 +1017,7 @@ SpriteRenderer:
   m_SortingLayerID: 337798071
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 90036b376c2867d4ea02e9197b126edd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7996a839f9ea4074ba0bda074358d88c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1021,13 +1034,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1266331185}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.25, y: -3.16, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalRotation: {x: 0.026026195, y: 0.0009266371, z: 0.0003009839, w: 0.99966085}
+  m_LocalPosition: {x: 9.38, y: -2.6, z: -0}
+  m_LocalScale: {x: 0.34375, y: 0.3875, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 2.983, y: 0.10700001, z: 0.037}
 --- !u!1 &1663210309
 GameObject:
   m_ObjectHideFlags: 0
@@ -1081,7 +1094,7 @@ SpriteRenderer:
   m_SortingLayerID: 337798071
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6d5a50308ad0d3a45869c73e9e114c0f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2edfc00ac5f265840af28caa00808ba4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1098,13 +1111,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1663210309}
-  m_LocalRotation: {x: -0.0000034739217, y: 0.0040665623, z: 0.00085418555, w: 0.9999914}
-  m_LocalPosition: {x: 9.4, y: -2.7, z: -0.01}
-  m_LocalScale: {x: 0.92556006, y: 1.1937, z: 1.5837796}
+  m_LocalRotation: {x: 0.010474297, y: 0.0040752892, z: 0.00081152975, w: 0.9999365}
+  m_LocalPosition: {x: 9.05, y: -2.6, z: -0.4}
+  m_LocalScale: {x: 0.7586601, y: 0.72599864, z: 1.5837796}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: -0.001, y: 0.46600002, z: 0.098000005}
+  m_LocalEulerAnglesHint: {x: 1.2, y: 0.46800002, z: 0.098000005}
 --- !u!114 &1663210312
 MonoBehaviour:
   m_ObjectHideFlags: 0
