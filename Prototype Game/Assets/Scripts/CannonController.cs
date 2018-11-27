@@ -92,8 +92,8 @@ public class CannonController : MonoBehaviour
             }
             if (bulletIsCreated == false && bulletMode == 1)
             {
-                if(gameIsPaused)
-                FireDoubleBullet();
+                if(!gameIsPaused)
+                    StartCoroutine(FireDoubleBullet(0.2f));
             }
         }
 
@@ -136,23 +136,25 @@ public class CannonController : MonoBehaviour
         shotsFiredText.text = "Shots Fired: " + shotsFiredCount.ToString();
     }
 
-    public void FireDoubleBullet() {
+    public IEnumerator FireDoubleBullet(float fireDelay) {
         Vector2 position = transform.position;
-
-        position.x += rigidbody.transform.up.x + 0.25f;
+        bulletIsCreated = true;
+        position.x += rigidbody.transform.up.x;
         position.y += rigidbody.transform.up.y;
         GameObject go = (GameObject)Instantiate(bullet, position, Quaternion.identity);
         go.GetComponent<BulletController>().xSpeed = rigidbody.transform.up.x * bulletSpeed;
         go.GetComponent<BulletController>().ySpeed = rigidbody.transform.up.y * bulletSpeed;
 
-        position.x += rigidbody.transform.up.x - 0.25f;
+        yield return new WaitForSeconds(fireDelay);
+
+        position.x += rigidbody.transform.up.x;
         position.y += rigidbody.transform.up.y;
         GameObject go1 = (GameObject)Instantiate(bullet, position, Quaternion.identity);
         go1.GetComponent<BulletController>().xSpeed = rigidbody.transform.up.x * bulletSpeed;
         go1.GetComponent<BulletController>().ySpeed = rigidbody.transform.up.y * bulletSpeed;
 
         shotsFiredCount = shotsFiredCount + 2;
-        //bulletIsCreated = true;
+
         shotsFiredText.text = "Shots Fired: " + shotsFiredCount.ToString();
     }
 
