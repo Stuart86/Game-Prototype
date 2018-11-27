@@ -61,14 +61,14 @@ public class CannonController : MonoBehaviour
 
         if (gameIsPaused)
         {
-            pauseBackgroundImage.enabled = true;
-            pauseMenuImage.enabled = true;
+            //pauseBackgroundImage.enabled = true;
+            //pauseMenuImage.enabled = true;
         }
 
         if (!gameIsPaused)
         {
-            pauseBackgroundImage.enabled = false;
-            pauseMenuImage.enabled = false;
+            //pauseBackgroundImage.enabled = false;
+            //pauseMenuImage.enabled = false;
         }
 
 
