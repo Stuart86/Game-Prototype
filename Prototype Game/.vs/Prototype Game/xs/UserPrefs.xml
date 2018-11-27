@@ -1,12 +1,13 @@
 ﻿<Properties StartupConfiguration="{72E9976F-ED57-2ACB-9B65-7DB04F2CED5D}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MainMenu.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CannonController.cs">
     <Files>
-      <File FileName="Assets/Scripts/CannonController.cs" Line="67" Column="14" />
-      <File FileName="Assets/Scripts/BulletController.cs" Line="29" Column="29" />
-      <File FileName="Assets/Scripts/BalloonController.cs" Line="56" Column="58" />
-      <File FileName="Assets/Scripts/GameController.cs" Line="5" Column="1" />
-      <File FileName="Assets/Scripts/MainMenu.cs" Line="10" Column="77" />
+      <File FileName="Assets/Scripts/CannonController.cs" Line="17" Column="32" />
+      <File FileName="Assets/Scripts/BulletController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/BalloonController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GameController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/MenuController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PauseMenuController.cs" Line="3" Column="19" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

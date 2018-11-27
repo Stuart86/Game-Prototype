@@ -8,27 +8,30 @@ public class BulletController : MonoBehaviour
     public float xSpeed = 0.0f;
     public float ySpeed = 0.0f;
 
-    CannonController cannonController;
+    CannonController CC;
 
 
     // Use this for initialization
     void Start()
     {
-        cannonController = FindObjectOfType<CannonController>();
+        CC = FindObjectOfType<CannonController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 position = transform.position;
-        position.x += xSpeed;
-        position.y += ySpeed;
-        transform.position = position;
+        if (!CC.gameIsPaused)
+        {
+            Vector2 position = transform.position;
+            position.x += xSpeed;
+            position.y += ySpeed;
+            transform.position = position;
+        }
     }
 
     void OnBecameInvisible()
     {
         Object.Destroy(gameObject);
-        cannonController.SetBulletIsCreated(false);
+        CC.SetBulletIsCreated(false);
     }
 }
