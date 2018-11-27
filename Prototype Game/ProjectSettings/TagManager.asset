@@ -8,6 +8,7 @@ TagManager:
   - BalloonTag
   - TriggerTestTag
   - CannonBall
+  - LevelDisplay
   layers:
   - Default
   - TransparentFX
