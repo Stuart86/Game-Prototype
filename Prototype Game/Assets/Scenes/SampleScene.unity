@@ -376,6 +376,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -401,18 +402,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f07e7d2271cd324d8f0694aac5e08af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RB: {fileID: 0}
+  RB: {fileID: 1099914258}
+  GS: {fileID: 519420033}
   Balloon: {fileID: 1039271705151174, guid: 9c4163942bdf848429b14b0ad56b32cc, type: 2}
   BalloonClones: []
   SpawnPos: {fileID: 1099914260}
-  ObjectSpawned: 0
-  ObjectsDestroyed: 0
-  SpawnNumber: 4
-  MaxBalloons: 40
-  BalloonLevel: 1
-  SpawnTime: 0
-  BalloonDestroyed: 0
-  BalloonPenetration: 0
+  DisplayLevelText: {fileID: 559270601}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -466,6 +461,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1f8e2e46c355d847a8426c3ac083e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectSpawned: 0
+  ObjectsDestroyed: 0
+  SpawnNumber: 0
+  MaxBalloons: 40
+  BalloonArmor: 1
+  Gamelevel: 1
+  FloatStrength: 30
+  SpawnTime: 0
+  BalloonDestroyed: 0
+  BalloonPenetration: 0
 --- !u!1 &559270599
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,8 +1527,7 @@ Prefab:
     - target: {fileID: 1756737437810012, guid: 1aa9edf9df69a49918f8320d3d81e2d7, type: 2}
       propertyPath: m_Icon
       value: 
-      objectReference: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000,
-        type: 0}
+      objectReference: {fileID: 0}
     - target: {fileID: 1756737437810012, guid: 1aa9edf9df69a49918f8320d3d81e2d7, type: 2}
       propertyPath: m_StaticEditorFlags
       value: 0
