@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 50777066853644066}
   - component: {fileID: 60523055573564428}
   - component: {fileID: 114343916963802022}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Balloon
   m_TagString: BalloonTag
   m_Icon: {fileID: 0}
@@ -154,7 +154,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Balloon: {fileID: 1039271705151174}
   RB: {fileID: 0}
-  FloatStrength: 2
+  BalloonHit: 0
+  GC: {fileID: 0}
+  GS: {fileID: 0}
+  CC: {fileID: 0}
 --- !u!212 &212958979061136560
 SpriteRenderer:
   m_ObjectHideFlags: 1

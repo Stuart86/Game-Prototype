@@ -38,7 +38,7 @@ public class BalloonController : MonoBehaviour
     {
         Object.Destroy(gameObject);
         GS.setBalloonDestroyedTrue();
-        //Debug.Log("Object killed yes man!");
+        GC.ReInsertBalloon(Balloon.transform.position.x);                
     }
 
     public void OnTriggerEnter2D(Collider2D other)

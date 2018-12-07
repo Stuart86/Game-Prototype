@@ -3,7 +3,12 @@ guid: 8f07e7d2271cd324d8f0694aac5e08af
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - RB: {instanceID: 0}
+  - GS: {instanceID: 0}
+  - Balloon: {fileID: 1039271705151174, guid: 9c4163942bdf848429b14b0ad56b32cc, type: 2}
+  - SpawnPos: {instanceID: 0}
+  - DisplayLevelText: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

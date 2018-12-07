@@ -13,10 +13,12 @@ public class GameSettings : MonoBehaviour
     public int Gamelevel = 1;
 
     public float FloatStrength = 30f;
+    public float FlightSpeed = 200f;
     public float SpawnTime = 0;
 
     public bool BalloonDestroyed = false;
     public bool BalloonPenetration = false;
+    public bool MayhemMode = false;
 
     public void setGamelevel(int Gamelevel)
     {
@@ -98,5 +100,21 @@ public class GameSettings : MonoBehaviour
     public int getMaxBalloons()
     {
         return MaxBalloons;
+    }
+    public void SetMayhemGameModeTrue()
+    {
+        MayhemMode = true;
+    }
+    public bool GetMayhemGameMode()
+    {
+        return MayhemMode;
+    }
+    public void setFlightSpeed(float FlightSpeed)
+    {
+        this.FlightSpeed = FlightSpeed;
+    }
+    public float getFlightSpeed()
+    {
+        return this.FlightSpeed;
     }
 }

@@ -9,44 +9,104 @@ public class GameController : MonoBehaviour
     public Rigidbody2D RB;
     public GameSettings GS;
     public GameObject Balloon;
+    public GameObject WarPigeon;
+    public GameObject[] WarPigeonClones;
     public GameObject[] BalloonClones;
     public Transform SpawnPos;
     public Text DisplayLevelText;
+    
+    public float secondsBetweenSpawn = 2;
+    public float elapsedTime = 0.0f;
+
+    public List<int> VerticalStartingPos;
+
 
     // Use this for initialization
     public void Start()
     {
         GS = FindObjectOfType<GameSettings>();
         BalloonClones = new GameObject[GS.getMaxBalloons()];
-        StartCoroutine(SpawnObject(1, GS.getSpawnTime()));
+        WarPigeonClones = new GameObject[25];
+        VerticalStartingPos = new List<int> { 1, 2, 3, 4, 5, 6, 7 };
+
+        //GS.SetMayhemGameModeTrue();
+        StartCoroutine(SpawnBalloon(1, GS.getSpawnTime()));
         StartCoroutine(GameLevelTrigger(0));
     }
     // Update is called once per frame
     public void Update()
     {
+        elapsedTime += Time.deltaTime;
+
         if (GS.getBalloonDestroyed() == true && GS.getObjectsDestroyed() == GS.getObjectSpawnedCount())
         {
             for (int i = 0; i < GS.getSpawnNumber(); i++)
             {
-                StartCoroutine(SpawnObject(i, GS.getSpawnTime()));
+                StartCoroutine(SpawnBalloon(i, GS.getSpawnTime()));
             }
 
             GS.setBalloonDestroyedFalse();
         }
+
+        if (GS.GetMayhemGameMode() == true && elapsedTime > secondsBetweenSpawn)
+        {
+            elapsedTime = 0;
+            StartCoroutine(SpawnBalloon(1, GS.getSpawnTime()));
+        }
     }
-    public IEnumerator SpawnObject(int Objectnumber, float delayTime)
+
+    public IEnumerator SpawnBalloon(int Objectnumber, float delayTime)
     {
         yield return new WaitForSeconds(delayTime);
 
-        BalloonClones[Objectnumber] = Instantiate(Balloon, new Vector2(Random.Range(-10f, max: -2.0f), Random.Range(-4f, -3f)), Quaternion.identity);
-        RB = BalloonClones[Objectnumber].GetComponent<Rigidbody2D>();
+        float hor = 0;
+        float ver = 0;
 
+        if (GS.GetMayhemGameMode() == false)
+        {
+            hor = Random.Range(-4f, -3f);
+            int idx = VerticalStartingPos[Random.Range(0, VerticalStartingPos.Count)];
+            VerticalStartingPos.Remove(idx);
+            ver = 3f + idx * -1.5f;
+        }
+
+        if (GS.GetMayhemGameMode() == true)
+        {
+            Invoke("DisableLevelText", 0);
+
+            hor = Random.Range(-4f, -3f);
+            ver = Random.Range(-8f, -2f);
+        }
+
+        Vector2 pos = new Vector2(ver, hor);
+
+        BalloonClones[Objectnumber] = Instantiate(Balloon, pos, Quaternion.identity);
+        RB = BalloonClones[Objectnumber].GetComponent<Rigidbody2D>();
         GS.ObjectSpawnedCounter();
     }
+
+
+    public IEnumerator SpawnPigeon(int Objectnumber, float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+
+        Vector2 pos = new Vector2(-14, 1);
+
+        WarPigeonClones[Objectnumber] = Instantiate(WarPigeon, pos, Quaternion.identity);
+        RB = WarPigeonClones[Objectnumber].GetComponent<Rigidbody2D>();
+    }
+
+        public void ReInsertBalloon(float x)
+    {
+        int v = (int)((x - 3f) /- 1.5f);
+        VerticalStartingPos.Add(v);
+    }
+
     public void DisableLevelText()
     {
         DisplayLevelText.text = "";
     }
+
     public void DisplayText(int textchoice)
     {
         //Debug.Log("ObjectsDestroyed: " + ObjectsDestroyed + " ObjectsSpawned: " + ObjectSpawned);
@@ -62,13 +122,13 @@ public class GameController : MonoBehaviour
                 DisplayLevelText.text = "Game over!";
                 break;
             case 4:
-               
+
                 break;
             case 5:
-               
+
                 break;
             case 6:
-   
+
                 break;
             default:
                 Debug.Log("Default Break");
@@ -76,15 +136,16 @@ public class GameController : MonoBehaviour
         }
 
     }
-    
+
     public IEnumerator GameLevelTrigger(float delayTime)
     {
         switch (GS.getGamelevel())
         {
             case 1:
                 yield return new WaitForSeconds(delayTime);
+                StartCoroutine(SpawnPigeon(1,2));
                 DisplayText(1);
-                GS.setSpawnTime(2.0f);
+                GS.setSpawnTime(1.0f);
                 GS.setSpawnNumber(1);
                 GS.setFloatStrength(30.0f);
                 GS.setGamelevel(2);
@@ -144,6 +205,5 @@ public class GameController : MonoBehaviour
                 Debug.Log("Default Break");
                 break;
         }
-
     }
 }
