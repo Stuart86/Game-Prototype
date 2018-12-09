@@ -13,6 +13,8 @@ public class BalloonController : MonoBehaviour
     public GameSettings GS;
     public CannonController CC;
 
+    bool WindisActive = false;
+
     // Use this for initializationa
     public void Start()
     {
@@ -26,7 +28,18 @@ public class BalloonController : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-      
+        //Debug.Log("Virker ikke?");
+
+        if (WindisActive == false && GS.getBalloonWindRight() > 0 == true)
+        {
+            RB.AddForce(Vector2.right * GS.getBalloonWindRight());
+            this.WindisActive = true;
+        }
+        if (WindisActive == false && GS.getBalloonWindLeft() > 0 == true)
+        {
+            RB.AddForce(Vector2.left * GS.getBalloonWindLeft());
+            this.WindisActive = true;
+        }
     }
 
     public void VelocityChange(float FloatStrength)

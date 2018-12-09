@@ -11,10 +11,13 @@ public class GameSettings : MonoBehaviour
     public int MaxBalloons = 40;
     public int BalloonArmor = 1;
     public int Gamelevel = 1;
+    public int BalloonWindLeft = 0;
+    public int BalloonWindRight = 0;
 
     public float FloatStrength = 30f;
     public float FlightSpeed = 200f;
     public float SpawnTime = 0;
+    public float PigeonMaxSpawnTime = 0;
 
     public bool BalloonDestroyed = false;
     public bool BalloonPenetration = false;
@@ -77,6 +80,14 @@ public class GameSettings : MonoBehaviour
     {
         return SpawnTime;
     }
+    public void setPigeonMaxSpawnTime(float newPigeonMaxSpawnTime)
+    {
+        this.PigeonMaxSpawnTime = newPigeonMaxSpawnTime;
+    }
+    public float getPigeonMaxSpawnTime()
+    {
+        return PigeonMaxSpawnTime;
+    }
     public void setBalloonDifficulty(int Balloonlv)
     {
         this.BalloonArmor = Balloonlv;
@@ -116,5 +127,23 @@ public class GameSettings : MonoBehaviour
     public float getFlightSpeed()
     {
         return this.FlightSpeed;
+    }
+    public void setBalloonWindLeft(int BalloonWindLeft)
+    {
+        this.BalloonWindLeft = BalloonWindLeft;
+        this.BalloonWindRight = 0;
+    }
+    public int getBalloonWindLeft()
+    {
+        return BalloonWindLeft;
+    }
+    public void setBalloonWindRight(int BalloonWindRight)
+    {
+        this.BalloonWindRight = BalloonWindRight;
+        this.BalloonWindLeft = 0;
+    }
+    public int getBalloonWindRight()
+    {
+        return BalloonWindRight;
     }
 }

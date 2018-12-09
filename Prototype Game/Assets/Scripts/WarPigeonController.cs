@@ -34,7 +34,6 @@ public class WarPigeonController : MonoBehaviour
         {
             elapsedTime = 0;
             RB.AddForce(Vector2.up * upForce);
-            Debug.Log("YES");
         }
 
     }
