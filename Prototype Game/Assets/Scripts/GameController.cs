@@ -28,11 +28,19 @@ public class GameController : MonoBehaviour
         BalloonClones = new GameObject[GS.getMaxBalloons()];
         WarPigeonClones = new GameObject[25];
         VerticalStartingPos = new List<int> { 1, 2, 3, 4, 5, 6, 7 };
+    }
 
-        //GS.SetMayhemGameModeTrue();
+    public void StartGameLevelMode()
+    {
         StartCoroutine(SpawnBalloon(1, GS.getSpawnTime()));
         StartCoroutine(GameLevelTrigger(0));
     }
+    public void StartGameMode()
+    {
+        GS.SetMayhemGameModeTrue();
+    }
+
+
     // Update is called once per frame
     public void Update()
     {
