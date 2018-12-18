@@ -8,20 +8,30 @@ public class CannonController : MonoBehaviour
     public Text shotsFiredText;
     public Text balloonsDestroyedText;
     public Text moneyAmountText;
+    public Text gameLevelText;
+    public Text lifeAmountText;
 
     public int rotateSpeed = 120;
-    Rigidbody rigidbody;
+    Rigidbody myrigidbody;
     public float bulletSpeed;
-    public bool bulletIsCreated = false;
+    public bool cannonIsReloading = false;
+
 
     public int shotsFiredCount;
     public int balloonsDestroyedCount;
     public int moneyAmount;
+    public int rapidFireBulletAmount;
+    public int lifeAmount;
+
+    public float rapidfireDelayTime;
+    public float cannonReloadTime;
+
+    public PauseMenu pauseMenu;
+    public GameSettings gameSettings;
+    public GameOverController gameOverController;
+    public GameController gameController;
 
     public int bulletMode;
-
-    public bool gameIsPaused;
-
     public GameObject bullet;
 
     public Image pauseBackgroundImage;
@@ -30,20 +40,28 @@ public class CannonController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        lifeAmount = 3;
+        lifeAmountText.text = "Lifes: " + lifeAmount;
+
+        pauseMenu = FindObjectOfType<PauseMenu>();
+        gameOverController = FindObjectOfType<GameOverController>();
+        gameController = FindObjectOfType<GameController>();
 
         pauseBackgroundImage = GetComponent<Image>();
         pauseMenuImage = GetComponent<Image>();
 
-        rigidbody = GetComponent<Rigidbody>();
+        myrigidbody = GetComponent<Rigidbody>();
         bulletSpeed = 0.35f;
 
+        rapidfireDelayTime = 0.1f;
         shotsFiredCount = 0;
         balloonsDestroyedCount = 0;
         bulletMode = 0;
 
-        gameIsPaused = false;
+        rapidFireBulletAmount = 0;
 
-       
+        moneyAmount = 0;
+        cannonReloadTime = 2;
 
     }
 
@@ -52,112 +70,69 @@ public class CannonController : MonoBehaviour
     {
         Vector2 position = transform.position;
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (!gameIsPaused)
-                pauseGame();
-            else unpauseGame();
-        }
-
-        if (gameIsPaused)
-        {
-            //pauseBackgroundImage.enabled = true;
-            //pauseMenuImage.enabled = true;
-        }
-
-        if (!gameIsPaused)
-        {
-            //pauseBackgroundImage.enabled = false;
-            //pauseMenuImage.enabled = false;
-        }
-
-
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            bulletMode = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            bulletMode = 1;
-        }
-
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (bulletIsCreated == false && bulletMode == 0)
+            if (cannonIsReloading == false)
             {
-                if(!gameIsPaused)
-                FireNormalBullet();
-            }
-            if (bulletIsCreated == false && bulletMode == 1)
-            {
-                if(gameIsPaused)
-                FireDoubleBullet();
+                if (!PauseMenu.gameIsPaused)
+                {
+                    StartCoroutine(Fire(rapidfireDelayTime));
+
+                }
             }
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.I)){
+            Time.timeScale = 10;
+        }
+
+        if (Input.GetKey(KeyCode.A) || (Input.GetKey(KeyCode.LeftArrow)))
         {
             transform.Rotate(Vector3.forward * rotateSpeed * Time.deltaTime);
         }
         
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) || (Input.GetKey(KeyCode.RightArrow)))
         {
             transform.Rotate(Vector3.back * rotateSpeed * Time.deltaTime);
         }
     }
+
 
     void FixedUpdate()
     {
 
     }
 
-    public void pauseGame() {
-        Time.timeScale = 0;
-        gameIsPaused = !gameIsPaused;
-    }
-
-    public void unpauseGame() {
-        Time.timeScale = 1;
-        gameIsPaused = !gameIsPaused;
-    }
-
-    public void FireNormalBullet() {
+    public IEnumerator Fire(float delay)
+    {
         Vector2 position = transform.position;
 
-        position.x += rigidbody.transform.up.x * 1f;
-        position.y += rigidbody.transform.up.y * 1f;
-        GameObject go = (GameObject)Instantiate(bullet, position, Quaternion.identity);
-        go.GetComponent<BulletController>().xSpeed = rigidbody.transform.up.x * bulletSpeed;
-        go.GetComponent<BulletController>().ySpeed = rigidbody.transform.up.y * bulletSpeed;
-        shotsFiredCount = shotsFiredCount + 1;
-        bulletIsCreated = true;
-        shotsFiredText.text = "Shots Fired: " + shotsFiredCount.ToString();
+        for (int i = 0; i <= pauseMenu.GetRapidfireUpgrades(); i++)
+        {
+            position.x += myrigidbody.transform.up.x * 2f;
+            position.y += myrigidbody.transform.up.y * 2f;
+            GameObject go = (GameObject)Instantiate(bullet, position, Quaternion.identity);
+            go.GetComponent<BulletController>().xSpeed = myrigidbody.transform.up.x * bulletSpeed;
+            go.GetComponent<BulletController>().ySpeed = myrigidbody.transform.up.y * bulletSpeed;
+            shotsFiredCount = shotsFiredCount + 1;
+
+            Object.Destroy(go, 2f);
+
+            StartCoroutine(ReloadCannon(cannonReloadTime));
+            shotsFiredText.text = "Shots Fired: " + shotsFiredCount.ToString();
+            yield return new WaitForSeconds(delay);
+        }
     }
 
-    public void FireDoubleBullet() {
-        Vector2 position = transform.position;
-
-        position.x += rigidbody.transform.up.x + 0.25f;
-        position.y += rigidbody.transform.up.y;
-        GameObject go = (GameObject)Instantiate(bullet, position, Quaternion.identity);
-        go.GetComponent<BulletController>().xSpeed = rigidbody.transform.up.x * bulletSpeed;
-        go.GetComponent<BulletController>().ySpeed = rigidbody.transform.up.y * bulletSpeed;
-
-        position.x += rigidbody.transform.up.x - 0.25f;
-        position.y += rigidbody.transform.up.y;
-        GameObject go1 = (GameObject)Instantiate(bullet, position, Quaternion.identity);
-        go1.GetComponent<BulletController>().xSpeed = rigidbody.transform.up.x * bulletSpeed;
-        go1.GetComponent<BulletController>().ySpeed = rigidbody.transform.up.y * bulletSpeed;
-
-        shotsFiredCount = shotsFiredCount + 2;
-        //bulletIsCreated = true;
-        shotsFiredText.text = "Shots Fired: " + shotsFiredCount.ToString();
+    public IEnumerator ReloadCannon(float delay) {
+        cannonIsReloading = true;
+        yield return new WaitForSeconds(delay);
+        cannonIsReloading = false;
     }
 
     public void SetBulletIsCreated(bool bob) {
-        bulletIsCreated = bob;
+        cannonIsReloading = bob;
     }
 
     public void IncrementBalloonsDestroyedCount(int integer) {
@@ -170,4 +145,39 @@ public class CannonController : MonoBehaviour
         moneyAmountText.text = "Money Amount: " + moneyAmount.ToString();
     }
 
+    public int GetMoneyAmount() {
+        return moneyAmount;
+    }
+
+    public void DecrementMoneyAmount(int incrementValue) {
+        moneyAmount = moneyAmount - incrementValue;
+    }
+
+    public void SetGameLevelText(int INT) {
+        if(INT == 0){
+            gameLevelText.text = "Mayhem!";
+            return;
+        }
+        gameLevelText.text = "Current Level: " + INT;
+    }
+
+    public void SetLifeAmountText() {
+        lifeAmountText.text = "Lifes: " + lifeAmount;
+    }
+    public void DecrementLife() {
+        lifeAmount = lifeAmount - 1;
+        if (lifeAmount < 1) {
+            gameController.SetGameIsLost();
+            gameOverController.GameOver();
+        }
+        SetLifeAmountText();
+    }
+
+    public int GetLifeAmount() {
+        return lifeAmount;
+    }
+
+    public void IncrementLife() {
+        lifeAmount++;
+    }
 }

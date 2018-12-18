@@ -15,12 +15,13 @@ public class BulletController : MonoBehaviour
     void Start()
     {
         CC = FindObjectOfType<CannonController>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!CC.gameIsPaused)
+        if (!PauseMenu.gameIsPaused)
         {
             Vector2 position = transform.position;
             position.x += xSpeed;
@@ -29,9 +30,8 @@ public class BulletController : MonoBehaviour
         }
     }
 
-    void OnBecameInvisible()
+    public void WaitAndDestroy()
     {
-        Object.Destroy(gameObject);
-        CC.SetBulletIsCreated(false);
+        Destroy(gameObject);
     }
 }

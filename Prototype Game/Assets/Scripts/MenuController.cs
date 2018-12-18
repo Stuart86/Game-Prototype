@@ -5,17 +5,33 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour {
 
+    static int gameMode;
 
+    private void Start()
+    {
+
+    }
     public void playLevelMode () {
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        gameMode = 1;
         SceneManager.LoadScene(1);
     }
 
-    public void playSurvivalGame() {
-        Debug.Log("Play Survival Game!");
+    public void playMayhemMode() {
+        gameMode = 2;
+        Debug.Log(gameMode);
+        SceneManager.LoadScene(1);
     }
     public void quitGame() {
         Debug.Log("QUIT!");
         Application.Quit();
+    }
+
+
+    public int GetGameMode() {
+        return gameMode;
+    }
+
+    public void SetGameMode(int mode) {
+        gameMode = mode;
     }
 }

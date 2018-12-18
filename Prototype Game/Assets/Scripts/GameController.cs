@@ -5,38 +5,70 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-
+    public MenuController MC;
     public Rigidbody2D RB;
     public GameSettings GS;
+    public CannonController CC;
     public GameObject Balloon;
     public GameObject WarPigeon;
     public GameObject[] WarPigeonClones;
     public GameObject[] BalloonClones;
     public Transform SpawnPos;
     public Text DisplayLevelText;
-    
+
+    public bool GameWon;
+    public bool GameLost;
+
     public float secondsBetweenSpawn = 2;
     public float elapsedTime = 0.0f;
 
     public List<int> VerticalStartingPos;
 
 
+
     // Use this for initialization
     public void Start()
     {
+       
+        MC = FindObjectOfType<MenuController>();
         GS = FindObjectOfType<GameSettings>();
+        CC = FindObjectOfType<CannonController>();
         BalloonClones = new GameObject[GS.getMaxBalloons()];
         WarPigeonClones = new GameObject[25];
         VerticalStartingPos = new List<int> { 1, 2, 3, 4, 5, 6, 7 };
+        StartGame();
 
-        //GS.SetMayhemGameModeTrue();
+    }
+
+
+    public void StartGame() {
+        if (MC.GetGameMode() == 1)
+        {
+            StartGameLevelMode();
+        }
+        else if (MC.GetGameMode() == 2) {
+            StartMayhemMode();
+        }
+    }
+    public void StartGameLevelMode()
+    {
         StartCoroutine(SpawnBalloon(1, GS.getSpawnTime()));
         StartCoroutine(GameLevelTrigger(0));
     }
+    public void StartMayhemMode()
+    {
+        Time.timeScale = 1;
+        CC.SetGameLevelText(0);
+        GS.SetMayhemGameModeTrue();
+        DisplayText(4);
+    }
+
+
     // Update is called once per frame
     public void Update()
     {
         elapsedTime += Time.deltaTime;
+
 
         if (GS.getBalloonDestroyed() == true && GS.getObjectsDestroyed() == GS.getObjectSpawnedCount())
         {
@@ -75,7 +107,7 @@ public class GameController : MonoBehaviour
             Invoke("DisableLevelText", 0);
 
             hor = Random.Range(-4f, -3f);
-            ver = Random.Range(-8f, -2f);
+            ver = Random.Range(-8f, 4f);
         }
 
         Vector2 pos = new Vector2(ver, hor);
@@ -98,7 +130,7 @@ public class GameController : MonoBehaviour
 
     public void SpawnPigeonSetup(int MaxPigeons)
     {
-        for(int i = 0; i < MaxPigeons; i++)
+        for (int i = 0; i < MaxPigeons; i++)
         {
             StartCoroutine(SpawnPigeon(i, Random.Range(5, GS.getPigeonMaxSpawnTime())));
         }
@@ -122,6 +154,7 @@ public class GameController : MonoBehaviour
         {
             case 1:
                 DisplayLevelText.text = "Level " + GS.getGamelevel();
+                CC.SetGameLevelText(GS.getGamelevel());
                 break;
             case 2:
                 DisplayLevelText.text = "You won!";
@@ -130,7 +163,7 @@ public class GameController : MonoBehaviour
                 DisplayLevelText.text = "Game over!";
                 break;
             case 4:
-
+                DisplayLevelText.text = "Mayhem!!";
                 break;
             case 5:
 
@@ -203,7 +236,7 @@ public class GameController : MonoBehaviour
                 GS.setFloatStrength(95.0f);
                 GS.setGamelevel(6);
                 GS.setPigeonMaxSpawnTime(10);
-                
+
                 Invoke("DisableLevelText", 4);
                 StartCoroutine(GameLevelTrigger(85));
                 break;
@@ -216,9 +249,28 @@ public class GameController : MonoBehaviour
                 Invoke("DisableLevelText", 4);
                 DisplayText(2);
                 break;
+            case 7:
+
+                break;
             default:
                 Debug.Log("Default Break");
                 break;
         }
+    }
+
+    public void SetGameIsLost() {
+        GameLost = true;
+    }
+
+    public void SetGameIsWon() {
+        GameWon = true;
+    }
+
+    public bool GetGameLost() {
+        return GameLost;
+    }
+
+    public bool GetGameWon() {
+        return GameWon;
     }
 }

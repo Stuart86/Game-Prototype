@@ -22,6 +22,7 @@ public class WarPigeonController : MonoBehaviour
         RB = WarPigeon.GetComponent<Rigidbody2D>();
         GS = FindObjectOfType<GameSettings>();
         GC = FindObjectOfType<GameController>();
+        CC = FindObjectOfType<CannonController>();
         VelocityChange(GS.getFlightSpeed());
     }
 	
@@ -52,6 +53,8 @@ public class WarPigeonController : MonoBehaviour
         {
             Destroy(other.gameObject);
             Destroy(WarPigeon);
+            CC.DecrementLife();
+            CC.IncrementMoneyAmountWith(-5);
             //CC.IncrementMoneyAmountWith(2);
         }
     }

@@ -51,11 +51,13 @@ public class BalloonController : MonoBehaviour
     {
         Object.Destroy(gameObject);
         GS.setBalloonDestroyedTrue();
-        GC.ReInsertBalloon(Balloon.transform.position.x);                
+        GC.ReInsertBalloon(Balloon.transform.position.x);
+        CC.DecrementLife();
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
+
         if (other.gameObject.CompareTag("CannonBall"))
         {
             BalloonHit++;
@@ -63,14 +65,14 @@ public class BalloonController : MonoBehaviour
             if (GS.getBalloonPenetration() == false)
             {
                 Destroy(other.gameObject);
-                CC.SetBulletIsCreated(false);
             }
             if (GS.getBalloonDifficulty() == BalloonHit)
             {
                 Destroy(Balloon);
                 CC.IncrementBalloonsDestroyedCount(1);
                 CC.IncrementMoneyAmountWith(2);
+                CC.IncrementLife();
             }
         }
-    }
+    } 
 }
