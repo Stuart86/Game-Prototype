@@ -479,7 +479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RB: {fileID: 1099914258}
-  GS: {fileID: 519420033}
+  GS: {fileID: 0}
   Balloon: {fileID: 1039271705151174, guid: 9c4163942bdf848429b14b0ad56b32cc, type: 2}
   WarPigeon: {fileID: 1763345406473372, guid: b3a93a5a456d4254ca20879409467a1a, type: 2}
   WarPigeonClones: []
@@ -559,9 +559,12 @@ MonoBehaviour:
   MaxBalloons: 40
   BalloonArmor: 1
   Gamelevel: 1
+  BalloonWindLeft: 0
+  BalloonWindRight: 0
   FloatStrength: 30
   FlightSpeed: 20
   SpawnTime: 0
+  PigeonMaxSpawnTime: 0
   BalloonDestroyed: 0
   BalloonPenetration: 0
   MayhemMode: 0

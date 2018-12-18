@@ -27,7 +27,8 @@ public class GameController : MonoBehaviour
         GS = FindObjectOfType<GameSettings>();
         BalloonClones = new GameObject[GS.getMaxBalloons()];
         WarPigeonClones = new GameObject[25];
-        VerticalStartingPos = new List<int> { 1, 2, 3, 4, 5, 6, 7 };
+        VerticalStartingPos = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8};
+        StartGameLevelMode();
     }
 
     public void StartGameLevelMode()
@@ -73,9 +74,10 @@ public class GameController : MonoBehaviour
         if (GS.GetMayhemGameMode() == false)
         {
             hor = Random.Range(-4f, -3f);
-            int idx = VerticalStartingPos[Random.Range(0, VerticalStartingPos.Count)];
-            VerticalStartingPos.Remove(idx);
-            ver = 5f + idx * -2.5f;
+            //int idx = VerticalStartingPos[Random.Range(0, VerticalStartingPos.Count)];
+            //VerticalStartingPos.Remove(idx);
+            //ver = 5f + idx * -1.5f;
+            ver = Random.Range(-8f, 4f);
         }
 
         if (GS.GetMayhemGameMode() == true)
@@ -83,7 +85,7 @@ public class GameController : MonoBehaviour
             Invoke("DisableLevelText", 0);
 
             hor = Random.Range(-4f, -3f);
-            ver = Random.Range(-8f, -2f);
+            ver = Random.Range(-8f, 4f);
         }
 
         Vector2 pos = new Vector2(ver, hor);
@@ -114,7 +116,7 @@ public class GameController : MonoBehaviour
 
     public void ReInsertBalloon(float x)
     {
-        int v = (int)((x - 5f) / -2.5f);
+        int v = (int)((x - 5f) / -1.5f);
         VerticalStartingPos.Add(v);
     }
 
@@ -160,7 +162,7 @@ public class GameController : MonoBehaviour
             case 1:
                 yield return new WaitForSeconds(delayTime);
                 DisplayText(1);
-                GS.setSpawnTime(1.0f);
+                GS.setSpawnTime(1.6f);
                 GS.setSpawnNumber(1);
                 GS.setFloatStrength(30.0f);
                 GS.setGamelevel(2);
@@ -211,7 +213,7 @@ public class GameController : MonoBehaviour
                 GS.setFloatStrength(95.0f);
                 GS.setGamelevel(6);
                 GS.setPigeonMaxSpawnTime(10);
-                
+                SpawnPigeonSetup(5);
                 Invoke("DisableLevelText", 4);
                 StartCoroutine(GameLevelTrigger(85));
                 break;
@@ -221,6 +223,7 @@ public class GameController : MonoBehaviour
                 GS.setSpawnTime(0.8f);
                 GS.setSpawnNumber(6);
                 GS.setFloatStrength(108.0f);
+                SpawnPigeonSetup(6);
                 Invoke("DisableLevelText", 4);
                 DisplayText(2);
                 break;
